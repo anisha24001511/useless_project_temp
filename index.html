@@ -1,0 +1,591 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Should I Study? 💀</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #111827, #312e81);
+            color: white;
+            min-height: 100vh;
+            padding: 30px 15px;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: auto;
+            background: rgba(255,255,255,0.10);
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.4);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 42px;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #d1d5db;
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            margin-top: 20px;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 30px;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            background: #22c55e;
+            color: white;
+        }
+
+        button:hover {
+            transform: scale(1.02);
+        }
+
+        #loading {
+            display: none;
+            text-align: center;
+            margin-top: 30px;
+            font-size: 20px;
+        }
+
+        #result {
+            display: none;
+            margin-top: 30px;
+            padding: 25px;
+            border-radius: 20px;
+            background: rgba(0,0,0,0.3);
+        }
+
+        .score {
+            margin: 20px 0;
+        }
+
+        .score-top {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 7px;
+        }
+
+        .bar {
+            height: 15px;
+            background: #374151;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .fill {
+            height: 100%;
+            width: 0%;
+            background: #22c55e;
+            transition: width 1s;
+        }
+
+        .verdict {
+            text-align: center;
+            font-size: 25px;
+            font-weight: bold;
+            margin-top: 30px;
+        }
+
+        .small {
+            text-align: center;
+            color: #9ca3af;
+            font-size: 12px;
+            margin-top: 25px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>📚 Should I Study?</h1>
+
+    <p class="subtitle">
+        Let our completely unqualified AI decide your future 💀
+    </p>
+
+
+    <!-- SUBJECT -->
+
+    <label>📖 What subject are you studying?</label>
+
+    <input
+        type="text"
+        id="subject"
+        placeholder="Example: COA"
+    >
+
+
+    <!-- EXAM -->
+
+    <label>📅 When is your exam?</label>
+
+    <select id="exam">
+
+        <option value="today">
+            Today 💀
+        </option>
+
+        <option value="tomorrow">
+            Tomorrow ☠️
+        </option>
+
+        <option value="week">
+            Within a week 😐
+        </option>
+
+        <option value="month">
+            More than a month 😎
+        </option>
+
+    </select>
+
+
+    <!-- PREPARATION -->
+
+    <label>📚 How much have you studied?</label>
+
+    <select id="preparation">
+
+        <option value="0">0% — I opened the book only</option>
+
+        <option value="20">20%</option>
+
+        <option value="40">40%</option>
+
+        <option value="60">60%</option>
+
+        <option value="80">80%</option>
+
+        <option value="100">100% — I'm a legend</option>
+
+    </select>
+
+
+    <!-- SLEEP -->
+
+    <label>😴 How sleepy are you?</label>
+
+    <select id="sleep">
+
+        <option value="1">1 — Fully awake</option>
+
+        <option value="3">3 — Little sleepy</option>
+
+        <option value="5">5 — Getting dangerous</option>
+
+        <option value="7">7 — Eyes closing</option>
+
+        <option value="10">10 — Already sleeping</option>
+
+    </select>
+
+
+    <!-- PHONE -->
+
+    <label>📱 How addicted are you to your phone?</label>
+
+    <select id="phone">
+
+        <option value="1">1 — I don't need my phone</option>
+
+        <option value="3">3 — Normal</option>
+
+        <option value="5">5 — Checking notifications</option>
+
+        <option value="8">8 — One more reel</option>
+
+        <option value="10">10 — Phone is my life</option>
+
+    </select>
+
+
+    <!-- BUTTON -->
+
+    <button onclick="decide()">
+        🔮 DECIDE MY FATE
+    </button>
+
+
+    <!-- LOADING -->
+
+    <div id="loading">
+
+        🤖 AI is thinking...
+
+        <br><br>
+
+        Analyzing your academic disaster...
+
+    </div>
+
+
+    <!-- RESULT -->
+
+    <div id="result">
+
+        <h2 style="text-align:center;">
+            🤖 AI ANALYSIS
+        </h2>
+
+        <p id="subjectResult"
+           style="text-align:center;">
+        </p>
+
+
+        <!-- STUDY SCORE -->
+
+        <div class="score">
+
+            <div class="score-top">
+
+                <span>📚 Study Need</span>
+
+                <span id="studyText">0%</span>
+
+            </div>
+
+            <div class="bar">
+
+                <div class="fill"
+                     id="studyBar">
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- PROCRASTINATION -->
+
+        <div class="score">
+
+            <div class="score-top">
+
+                <span>📱 Procrastination</span>
+
+                <span id="proText">0%</span>
+
+            </div>
+
+            <div class="bar">
+
+                <div class="fill"
+                     id="proBar">
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SURVIVAL -->
+
+        <div class="score">
+
+            <div class="score-top">
+
+                <span>💀 Exam Survival</span>
+
+                <span id="survivalText">0%</span>
+
+            </div>
+
+            <div class="bar">
+
+                <div class="fill"
+                     id="survivalBar">
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- FINAL VERDICT -->
+
+        <div class="verdict"
+             id="verdict">
+        </div>
+
+    </div>
+
+
+    <p class="small">
+        ⚠️ This AI is completely useless and has no academic qualifications.
+    </p>
+
+</div>
+
+
+<script>
+
+function decide() {
+
+    let subject =
+        document.getElementById("subject").value;
+
+    let exam =
+        document.getElementById("exam").value;
+
+    let preparation =
+        Number(document.getElementById("preparation").value);
+
+    let sleep =
+        Number(document.getElementById("sleep").value);
+
+    let phone =
+        Number(document.getElementById("phone").value);
+
+
+    // If subject is empty
+
+    if (subject === "") {
+
+        subject = "Unknown Subject";
+
+    }
+
+
+    // Calculate fake AI scores
+
+    let studyNeed =
+        100 - preparation;
+
+
+    if (exam === "today") {
+        studyNeed += 20;
+    }
+
+    if (exam === "tomorrow") {
+        studyNeed += 15;
+    }
+
+    if (exam === "week") {
+        studyNeed += 5;
+    }
+
+
+    studyNeed =
+        Math.min(100, studyNeed);
+
+
+    let procrastination =
+        phone * 10;
+
+
+    let survival =
+        preparation;
+
+
+    if (exam === "today") {
+        survival -= 20;
+    }
+
+    if (exam === "tomorrow") {
+        survival -= 10;
+    }
+
+
+    survival =
+        Math.max(5, Math.min(100, survival));
+
+
+    // Show loading screen
+
+    document.getElementById("loading")
+        .style.display = "block";
+
+    document.getElementById("result")
+        .style.display = "none";
+
+
+    // Wait 2 seconds
+
+    setTimeout(function() {
+
+        document.getElementById("loading")
+            .style.display = "none";
+
+        document.getElementById("result")
+            .style.display = "block";
+
+
+        // Subject
+
+        document.getElementById("subjectResult")
+            .innerHTML =
+            "Subject detected: <b>" +
+            subject +
+            "</b>";
+
+
+        // Study score
+
+        document.getElementById("studyText")
+            .innerText =
+            studyNeed + "%";
+
+        document.getElementById("studyBar")
+            .style.width =
+            studyNeed + "%";
+
+
+        // Procrastination
+
+        document.getElementById("proText")
+            .innerText =
+            procrastination + "%";
+
+        document.getElementById("proBar")
+            .style.width =
+            procrastination + "%";
+
+
+        // Survival
+
+        document.getElementById("survivalText")
+            .innerText =
+            survival + "%";
+
+        document.getElementById("survivalBar")
+            .style.width =
+            survival + "%";
+
+
+        // Funny verdicts
+
+        let verdicts = [];
+
+
+        if (preparation <= 20) {
+
+            verdicts.push(
+                "🚨 BRO, YOU NEED TO STUDY!"
+            );
+
+            verdicts.push(
+                "💀 Your preparation is fighting for its life."
+            );
+
+            verdicts.push(
+                "📚 Open the book before the book opens your obituary."
+            );
+
+        }
+
+
+        if (phone >= 8) {
+
+            verdicts.push(
+                "📱 Put the phone down! The phone is studying you."
+            );
+
+            verdicts.push(
+                "😂 You have more screen time than study time."
+            );
+
+        }
+
+
+        if (sleep >= 7) {
+
+            verdicts.push(
+                "😴 Go sleep... but remember the exam exists."
+            );
+
+            verdicts.push(
+                "💤 Your brain has already submitted a leave letter."
+            );
+
+        }
+
+
+        if (
+            preparation >= 80 &&
+            phone <= 3
+        ) {
+
+            verdicts.push(
+                "👑 You're prepared! You can relax."
+            );
+
+        }
+
+
+        // General funny answers
+
+        verdicts.push(
+            "📱 One more reel... then definitely study."
+        );
+
+        verdicts.push(
+            "🤖 AI recommends studying. Human recommends sleeping."
+        );
+
+        verdicts.push(
+            "💀 Final answer: PANIC."
+        );
+
+        verdicts.push(
+            "🧠 Your brain says study. Your heart says YouTube."
+        );
+
+
+        // Random verdict
+
+        let random =
+            Math.floor(
+                Math.random() * verdicts.length
+            );
+
+
+        document.getElementById("verdict")
+            .innerText =
+            verdicts[random];
+
+
+    }, 2000);
+
+}
+
+</script>
+
+</body>
+</html>
