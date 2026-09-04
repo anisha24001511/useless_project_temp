@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>⚡ Useless Engineering Quick Revision Portal ⚡</title>
+  
+  <!-- Google Fonts: Poppins & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Floating Background Emojis -->
+  <div class="floating-emojis-layer" aria-hidden="true">
+    <span class="float-emoji e1">🤪</span>
+    <span class="float-emoji e2">🧪</span>
+    <span class="float-emoji e3">⚙️</span>
+    <span class="float-emoji e4">📚</span>
+    <span class="float-emoji e5">⚡</span>
+    <span class="float-emoji e6">🥟</span>
+    <span class="float-emoji e7">🤯</span>
+    <span class="float-emoji e8">💔</span>
+    <span class="float-emoji e9">🔥</span>
+    <span class="float-emoji e10">☕</span>
+  </div>
+
+  <!-- Fullscreen Particle Canvas for Celebrations -->
+  <canvas id="confetti-canvas" aria-hidden="true"></canvas>
+
+  <div class="app-layout">
+    
+    <!-- Top Vibrant Header -->
+    <header class="app-header">
+      <div class="header-logo-group">
+        <div class="logo-emoji-badge">⚡</div>
+        <div class="logo-title-group">
+          <span class="logo-tag">MANDATORY UNLEARNING PROTOCOL</span>
+          <h1 class="logo-main-text">QuickRevise <span>Useless Edition 🤡</span></h1>
+        </div>
+      </div>
+
+      <div class="header-controls">
+        <div class="status-chip">
+          <span class="live-dot"></span>
+          <span class="status-text">UNLEARNING ENGINE: <strong>SUPERCHARGED 🌀</strong></span>
+        </div>
+
+        <button id="sound-toggle-btn" class="sound-chip-btn" aria-label="Toggle Fun Sounds" title="Toggle Sound FX">
+          <span id="sound-icon">🔊</span>
+          <span id="sound-label">Audio: ON</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Dynamic Views -->
+    <main class="main-stage">
+
+      <!-- ======================================================= -->
+      <!-- VIEW 1: COLORFUL WELCOME & 2-FIELD REGISTRATION PAGE    -->
+      <!-- ======================================================= -->
+      <section id="welcome-view" class="view-panel active">
+        <div class="welcome-card glass-container">
+          
+          <div class="hero-top-badge">
+            <span class="badge-fire">🔥 100% CONFIDENCE GUARANTEE 🔥</span>
+          </div>
+
+          <h2 class="welcome-title">
+            Welcome to Quick Revision Section
+          </h2>
+
+          <!-- Official Warning Text (High Confidence Parody) -->
+          <div class="warning-banner-box">
+            <span class="warning-icon">⚠️</span>
+            <p class="warning-text">
+              <strong>WARNING:</strong> Attending this quick revision session gives <strong>100% CONFIDENCE</strong> to score <strong>FULL MARKS</strong> in your engineering exams! Proceed with extreme high spirits! 🎉🚀
+            </p>
+          </div>
+
+          <!-- Funny Student Registration Form (Only 2 Fields) -->
+          <form id="registration-form" class="reg-form" novalidate>
+            <div class="form-grid-two">
+              
+              <!-- Field 1: Student Name -->
+              <div class="form-group">
+                <label for="student-name">
+                  Student Name <span class="req">*</span>
+                </label>
+                <div class="input-wrapper">
+                  <input type="text" id="student-name" placeholder="Future Distinction Holder 🎓" required autocomplete="name">
+                  <span class="input-icon">👤</span>
+                </div>
+                <span class="field-error" id="name-error">Please enter your student name to accept full confidence!</span>
+              </div>
+
+              <!-- Field 2: Department Dropdown -->
+              <div class="form-group">
+                <label for="dept-select">
+                  Department <span class="req">*</span>
+                </label>
+                <div class="input-wrapper">
+                  <select id="dept-select" required>
+                    <option value="" disabled selected>Select Your Chosen Department...</option>
+                    <option value="CS - Code Strugglers">CS - Code Strugglers</option>
+                    <option value="Mech - Nut Bolt Experts">Mech - Nut Bolt Experts</option>
+                    <option value="EC - Circuit Burners">EC - Circuit Burners</option>
+                    <option value="Civil - Sand Castles">Civil - Sand Castles</option>
+                    <option value="EEE - Shock Receivers">EEE - Shock Receivers</option>
+                  </select>
+                  <span class="input-icon">⚙️</span>
+                </div>
+                <span class="field-error" id="dept-error">Please select your engineering department!</span>
+              </div>
+
+            </div>
+
+            <!-- Fun Highlight Notice -->
+            <div class="form-fun-notice">
+              <span>🎯 Exam Duration: <strong>Under 2 Minutes</strong></span>
+              <span>📈 Confidence Boost: <strong>+1000%</strong></span>
+              <span>📜 Official Certificate: <strong>Instantly Awarded</strong></span>
+            </div>
+
+            <!-- Start Action CTA -->
+            <div class="welcome-actions">
+              <button type="submit" id="start-revision-btn" class="btn btn-hero btn-bounce">
+                <span>Start Quick Revision 🚀</span>
+              </button>
+            </div>
+
+          </form>
+
+        </div>
+      </section>
+
+      <!-- ============================================== -->
+      <!-- VIEW 2: FUN QUIZ SECTION (Exact 4 Questions)   -->
+      <!-- ============================================== -->
+      <section id="quiz-view" class="view-panel hidden">
+        
+        <!-- Progress Bar & Question Stats -->
+        <div class="quiz-top-bar glass-container">
+          <div class="quiz-stats-row">
+            <span class="question-domain-badge" id="quiz-domain">⚡ DOMAIN: CHAOS DYNAMICS</span>
+            <span class="question-tracker">
+              Question <strong id="current-q-num">1</strong> of <strong id="total-q-num">4</strong>
+            </span>
+          </div>
+
+          <div class="progress-track-wrapper">
+            <div class="progress-bar-fill" id="progress-bar-fill" style="width: 25%;">
+              <span class="runner-emoji" id="runner-emoji">🏃‍♂️</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Question Card -->
+        <div class="question-card glass-container">
+          
+          <div class="question-meta-pill" id="question-category">
+            🔬 PHYSICS EXPERIMENT OF DOOM
+          </div>
+
+          <h2 class="question-headline" id="question-text">
+            Loading question...
+          </h2>
+
+          <!-- Interactive 4 Option Cards -->
+          <div class="options-container" id="options-container" role="radiogroup" aria-label="Quick Revision Options">
+            <!-- Dynamic Option Cards Rendered via JS -->
+          </div>
+
+          <!-- Quiz Action Footer -->
+          <div class="quiz-action-bar">
+            <button type="button" class="btn btn-skip" id="skip-btn">
+              <span>Skip to Next Crisis 🏃‍♂️</span>
+            </button>
+
+            <button type="button" class="btn btn-lock" id="next-btn" disabled>
+              <span id="next-btn-text">Lock In & Doubt Yourself 🤯</span>
+            </button>
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- ============================================== -->
+      <!-- VIEW 3: FINAL RESULT & USELESS CERTIFICATE     -->
+      <!-- ============================================== -->
+      <section id="result-view" class="view-panel hidden">
+        
+        <div class="result-showcase-wrapper">
+          
+          <!-- Fun Result Header -->
+          <div class="result-celebration-banner">
+            <span class="party-emoji-blast">🎉 🥳 🤡 📉 💥</span>
+            <h2 class="result-headline">MISSION ACCOMPLISHED! COMPLETE UNLEARNING CONFIRMED 🏆</h2>
+            <p class="result-sub-headline">
+              You had 100% confidence, but the laws of engineering had other plans!
+            </p>
+          </div>
+
+          <!-- Hilarious Score Card -->
+          <div class="score-card glass-container">
+            <div class="score-pill-badge">CERTIFIED ACADEMIC DETOX RESULT</div>
+            
+            <div class="score-visual-row">
+              <div class="score-circle-burst">
+                <span class="score-value">-10</span>
+                <span class="score-out-of">/ 100</span>
+                <span class="score-label">UNLEARNED 🧠</span>
+              </div>
+
+              <div class="score-info-block">
+                <h3 class="score-grade-title">OFFICIAL GRADE: F- (FATALISTIC DELUSION)</h3>
+                <p class="score-summary-text" id="score-summary-text">
+                  Congratulations! Despite maximum confidence, your engineering brain has achieved room-temperature superconductor status: zero resistance to absurdity and infinite capacity for unlearning!
+                </p>
+
+                <!-- Fun Diagnostic Metrics -->
+                <div class="result-metrics-grid">
+                  <div class="metric-pill">
+                    <span class="m-icon">🧠</span>
+                    <div class="m-info">
+                      <span class="m-val">0.00%</span>
+                      <span class="m-txt">Common Sense Retained</span>
+                    </div>
+                  </div>
+                  <div class="metric-pill">
+                    <span class="m-icon">🥟</span>
+                    <div class="m-info">
+                      <span class="m-val">100%</span>
+                      <span class="m-txt">Canteen Samosa Craving</span>
+                    </div>
+                  </div>
+                  <div class="metric-pill">
+                    <span class="m-icon">🌪️</span>
+                    <div class="m-info">
+                      <span class="m-val">+99.9%</span>
+                      <span class="m-txt">Hostel Entropy Level</span>
+                    </div>
+                  </div>
+                  <div class="metric-pill">
+                    <span class="m-icon">☕</span>
+                    <div class="m-info">
+                      <span class="m-val">A++</span>
+                      <span class="m-txt">Chai Stall Feasibility</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Candidate Credentials Summary Strip -->
+            <div class="candidate-meta-strip">
+              <div class="meta-item">
+                <span class="meta-label">STUDENT:</span>
+                <strong class="meta-val" id="summary-student-name">Future Distinction Holder 🎓</strong>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">DEPARTMENT:</span>
+                <strong class="meta-val" id="summary-dept">CS - Code Strugglers</strong>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- THE OFFICIAL CERTIFICATE OF COMPLETE UNLEARNING (Printable/Downloadable) -->
+          <div class="certificate-canvas-wrapper" id="printable-certificate">
+            <div class="certificate-rainbow-border">
+              <div class="certificate-inner-sheet">
+                
+                <!-- Corner Festive Badges -->
+                <div class="cert-corner c-tl">🎪</div>
+                <div class="cert-corner c-tr">🚀</div>
+                <div class="cert-corner c-bl">🥟</div>
+                <div class="cert-corner c-br">🤡</div>
+
+                <!-- Certificate Header -->
+                <div class="cert-top-header">
+                  <div class="cert-emoji-crest">🏅 🎓 ⚡</div>
+                  <div class="cert-authority">NATIONAL ACCREDITATION COUNCIL OF BEWILDERED DEANS</div>
+                  <div class="cert-doc-type">OFFICIAL PARODY DEGREE OF ABSOLUTE CONFUSION</div>
+                  <h3 class="cert-main-heading">Official Certificate of Complete Unlearning</h3>
+                </div>
+
+                <!-- Certificate Body Copy -->
+                <div class="cert-middle-content">
+                  <p class="cert-proclamation">This distinguished document hereby certifies that</p>
+                  
+                  <div class="cert-student-name-display" id="cert-student-name">
+                    Future Distinction Holder 🎓
+                  </div>
+
+                  <!-- Dynamic Student Credentials Block -->
+                  <div class="cert-credentials-grid">
+                    <div class="cred-chip">
+                      <span class="cred-lbl">Department:</span>
+                      <strong class="cred-data" id="cert-dept">CS - Code Strugglers</strong>
+                    </div>
+                  </div>
+
+                  <p class="cert-citation">
+                    has cheerfully attended the <strong>Useless Engineering Quick Revision Session</strong> with 100% confidence to score full marks, only to conclusively answer all questions with zero scientific reasoning and earn a certified official score of:
+                  </p>
+
+                  <div class="cert-score-banner">
+                    <span class="cert-score-number">-10 / 100</span>
+                    <span class="cert-score-comment">CERTIFIED ROOM-TEMPERATURE INTELLECT 📉</span>
+                  </div>
+
+                  <p class="cert-conferral">
+                    The candidate is hereby officially authorized to confuse all future exam invigilators, blame the canteen tea for all academic setbacks, and proudly unlearn any remaining concepts of physics, chemistry, and calculus.
+                  </p>
+                </div>
+
+                <!-- Fake Official Stamps & Signatures -->
+                <div class="cert-footer-row">
+                  <div class="cert-signature-col">
+                    <div class="fake-signature cursive-1">Prof. A. P. NullPointer</div>
+                    <div class="signature-designation">Dean of Runtime Exceptions 💻</div>
+                  </div>
+
+                  <div class="cert-gold-seal">
+                    <div class="seal-inner-circle">
+                      <span class="seal-emoji">🤡</span>
+                      <span class="seal-text-top">100% USELESS</span>
+                      <span class="seal-text-btm">GENUINE PARODY</span>
+                    </div>
+                  </div>
+
+                  <div class="cert-signature-col">
+                    <div class="fake-signature cursive-2">Dr. Samosa Sharma</div>
+                    <div class="signature-designation">HOD of Canteen Thermodynamics 🥟</div>
+                  </div>
+                </div>
+
+                <!-- Security Verification Strip -->
+                <div class="cert-verification-strip">
+                  <span>DATE: <strong id="cert-date-display">Today</strong></span>
+                  <span>VERIFICATION HASH: <strong id="cert-hash-display">USELESS-0xDEADBEEF-404</strong></span>
+                  <span>SECURITY: 100% SILLINESS VERIFIED 🛡️</span>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Result Control Actions -->
+          <div class="result-action-buttons">
+            <button type="button" class="btn btn-print btn-glow" id="print-certificate-btn">
+              <span>Print / Save Useless Certificate 🖨️</span>
+            </button>
+
+            <button type="button" class="btn btn-copy" id="copy-summary-btn">
+              <span id="copy-btn-label">Copy Unlearning Report 📋</span>
+            </button>
+
+            <button type="button" class="btn btn-restart" id="restart-quiz-btn">
+              <span>Revise Again & Lose More 🔄</span>
+            </button>
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- Global Toast Alerts -->
+    <div id="toast-pill" class="toast-pill hidden" role="alert" aria-live="assertive">
+      <span id="toast-icon">ℹ️</span>
+      <span id="toast-text">Toast message goes here!</span>
+    </div>
+
+    <!-- Fun Footer -->
+    <footer class="app-footer">
+      <p>⚡ Useless Engineering Quick Revision Portal • Built with pure sarcasm, instant noodles, and broken chalks.</p>
+      <p class="footer-fineprint">No actual professors, resistors, or samosas were harmed in the making of this mock test.</p>
+    </footer>
+
+  </div>
+
+  <!-- Main JavaScript File -->
+  <script src="script.js"></script>
+</body>
+</html>
